@@ -26,7 +26,6 @@ def validateScopeAddresses(tool, scope, current_list):
 
     
     elif tool == "curl":
-        print(scope)
         if scope.startswith("https://"):
             current_list.append(scope)
         elif scope.startswith("http://"):
