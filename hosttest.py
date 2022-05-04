@@ -11,38 +11,6 @@ help="Give the scope.txt to the program",
 type=argparse.FileType('r'))
 args = parser.parse_args()
 
-
-# #* Define and refine address list, removing what we don't need
-# new_scope = []      #* var for appended scope
-# old_scope = []      #* var for old scope to see changes
-# for line in args.filename:
-#     old_scope.append(line.strip('\n'))
-#     #* remove the https://www from the scope if found
-#     if line.startswith("https://www"):
-#         new_url = line[12:]
-#         new_url.strip('\n')
-#     #* remove the https:// from the scope if found        
-#     elif line.startswith("https://"):
-#         new_url = line[8:]
-#         new_url.strip('\n')
-#     #* remove the http://www from the scope if found
-#     elif line.startswith("http://www"):
-#         new_url = line[11:]
-#         new_url.strip('\n')
-#     #* remove the http:// from the scope if found
-#     elif line.startswith("http://"):
-#         new_url = line[7:]
-#         new_url.strip('\n')
-#     #* remove the www from the scope if found
-#     elif line.startswith("www"):
-#         new_url = line[4:]
-#         new_url.strip('\n')
-#     #* if none of the above is found, write current scope to var new_url
-#     else:
-#         new_url = line
-#     new_scope.append(new_url.strip('\n'))
-
-
 #* validate scope and keep only those that host can use
 scope = []
 original_scope = []
@@ -57,10 +25,6 @@ print("The following changes have been made:")
 for old, new in zip(original_scope, scope):
     if old != new:
         print("-",old,"is now",new)
-
-#// host [domain]
-#// host -t ns [domain]
-#// add zonetransfer 
 
 #* start host command with given scope
 try:
