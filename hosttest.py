@@ -47,19 +47,19 @@ try:
     except:
         print("Something went wrong while running the scan, please refer to")
 
-    # host_cmd = subprocess.Popen(('host -t ns {}'.format(host)), shell=True, stdout=subprocess.PIPE)
-    # print("\nThe following name servers have been found:")
-    # for line in host_cmd.stdout:
-    #     line = line.decode('utf-8').strip("\n")
-    #     if "name server" in line:
-    #         *_, nameserver = line.split(" ")
-    #         print("|- Nameserver: {}".format(nameserver))
+    host_cmd = subprocess.Popen(('host -t ns {}'.format(host)), shell=True, stdout=subprocess.PIPE)
+    print("\nThe following name servers have been found:")
+    for line in host_cmd.stdout:
+        line = line.decode('utf-8').strip("\n")
+        if "name server" in line:
+            *_, nameserver = line.split(" ")
+            print("|- Nameserver: {}".format(nameserver))
     
-    # host_cmd = subprocess.Popen(('host -t axfr {} {}'.format(host, nameserver)), shell=True, stdout=subprocess.PIPE)
-    # print("\nThe following DNS zone transfer information has been found:")
-    # for line in host_cmd.stdout:
-    #     line = line.decode('utf-8').strip("\n")
-    #     print("|=",line)
+    host_cmd = subprocess.Popen(('host -t axfr {} {}'.format(host, nameserver)), shell=True, stdout=subprocess.PIPE)
+    print("\nThe following DNS zone transfer information has been found:")
+    for line in host_cmd.stdout:
+        line = line.decode('utf-8').strip("\n")
+        print("|=",line)
 
 
 
