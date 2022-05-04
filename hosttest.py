@@ -6,7 +6,7 @@ from modules import validateScope #* custom scope validation script
 #* Define file argument
 parser = argparse.ArgumentParser(
     description="This program gives IP information about the scope")
-parser.add_argument('--filename', '-f',
+parser.add_argument('-f', '--filename',
 help="Give the scope.txt to the program", 
 type=argparse.FileType('r'))
 args = parser.parse_args()
