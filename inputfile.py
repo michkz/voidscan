@@ -21,3 +21,4 @@ try:
         print('> ', line.stdout.decode('utf-8'))
 except subprocess.CalledProcessError as error:
     print("Error code: ", error.returncode, '. Output: ', error.output.decode('utf-8'))
+    

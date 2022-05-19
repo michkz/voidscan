@@ -7,17 +7,17 @@ def validate_ip_address(address):
 
     ## return false if IP does not match
     if bool(match) is False:
-        print("IP address {} is not valid".format(address))
+        # print("IP address {} is not valid".format(address))
         return False
     
     ## check if IP meets requirements of what it should look like
     for part in address.split("."):
         if int(part) < 0 or int(part) > 255:
-            print("IP address {} is not valid".format(address))
+            # print("IP address {} is not valid".format(address))
             return False
 
     ## show if IP is valid
-    print("IP address {} is valid".format(address))
+    # print("IP address {} is valid".format(address))
     return True
 
     

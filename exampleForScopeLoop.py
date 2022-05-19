@@ -12,3 +12,4 @@ for line in addr:
     for line in host_cmd.stdout:
         line = line.decode('utf-8').strip("\n")
         print(line)
+        
