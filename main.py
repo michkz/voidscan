@@ -24,7 +24,7 @@ def main():
      #TODO sendToTemplate
      print(logo)
 
-     #* Argparse code that reads the input file
+     ## Argparse code that reads the input file
      parser = argparse.ArgumentParser(
                          description="""
                          This is a reconnaissance program that gathers useful 
@@ -32,7 +32,8 @@ def main():
                          """)
                          
      parser.add_argument('-f', '--filename',
-                         help="Provide the program with a scope.", 
+                         help="""Provide the program with a scope. f.e. 
+                         main.py -f [file.txt]""", 
                          type=argparse.FileType('r'))
                          
      args = parser.parse_args()
@@ -41,23 +42,20 @@ def main():
 
 
      ## Sending file contents to host command
-     print("Commencing host command")
-     print(hostAssets)
+     print("-=- Commencing host command -=-")
      hostCommand(hostAssets)
-     print("Now exiting host command")
+     print("-=- Now exiting host command -=-")
 
      ## Sending file contents to cURL command
-     print("Commencing cURL command")
-     print(curlAssets)
+     print("-=- Commencing cURL command -=-")
      curlCommand(curlAssets)
-     print("Now exiting cURL command")
+     print("-=- Now exiting cURL command -=-")
 
      #? - do not uncomment unless on own network due scanning
      # #* Sending file contents to nmap command
-     print("Commencing nmap command")
-     print(nmapAssets)
+     print("-=- Commencing nmap command -=-")
      nmapCommand(nmapAssets)
-     print("Now exiting nmap command")
+     print("-=- Now exiting nmap command -=-")
 
      print("Job's done")
 

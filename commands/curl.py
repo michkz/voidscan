@@ -1,36 +1,26 @@
 import subprocess                           ## subprocess library
-from modules import validateScope           ## custom scope validation script
 
 def curlCommand(assets):
     current_tool = "curl"                   ## Define tool name for validation
-    scope = []                              ## Creation of var scope
-
-    ## validate scope and keep only those that curl can use
-    for line in assets:
-        scope = validateScope.validateScopeAddresses(current_tool,
-                                                    line.strip("\n"), scope)
-
-
+    
     ## loop through the scope and print the results that are found for "curl -I"
     try:
-        if scope:
-            for asset in scope:
-                print("\n⌈¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯⌉ {}".format(asset))
+        if assets:
+            for hostname in assets:
+                print("\n⌈¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯⌉ {}".format(hostname))
                 new_location = ""
                 moved_host = ""
-                curl_cmd = subprocess.Popen("curl -I {}".format(asset),
+                curl_cmd = subprocess.Popen("curl -I {}".format(hostname),
                                             shell=True,stdout = subprocess.PIPE,
                                             stderr = subprocess.PIPE)
 
-                ## test if subprocess gets runned
-                print("executed subprocess")
                 for line in curl_cmd.stdout:
                     line = line.decode('utf-8').strip("\n\r")
                     ## show if host has moved and the new location
                     if (line.startswith("Location:") or 
                         line.startswith("location:")):
                         *_, new_location = line.split(" ")
-                        moved_host = asset
+                        moved_host = hostname
                     if len(line) > 0:
                         print("|",line)
                 ## if a new host is found, scan new location
@@ -50,7 +40,7 @@ def curlCommand(assets):
 
                 print("⌊________________")
         else:
-            print("Scope is empty..")
+            print("Skipping, no assets found")
     except TypeError as e:
         print(e)
     except Exception as e:
