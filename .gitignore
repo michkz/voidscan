@@ -1,4 +1,5 @@
 .vscode/launch.json
+inputfile.py
 scope.txt
 normal.txt
 .DS_Store
