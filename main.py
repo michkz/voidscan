@@ -3,8 +3,8 @@ from commands.host import hostCommand                 ## command to run host
 from commands.curl import curlCommand                 ## command to run curl
 from commands.nmap import nmapCommand                 ## command to run nmap
 from modules.prepareScope import prepareScopeForTool  ## script to prepare scope
+from modules.classes import classes                   ## Load in the classes
 
-import subprocess                                     ## subprocess library
 import argparse                                       ## argparse library
 
 
