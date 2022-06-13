@@ -1,5 +1,6 @@
-import re                                   ## regex library
-from modules import validateIPAddress       ## custom module to validate IP
+import re                                        ## Regex library
+from modules import validateIPAddress            ## Custom module to validate IP
+from modules.classes import Asset                ## Import Asset class
 
 def validate_ip_address(address):
     ## define what a valid IP should match to
@@ -20,48 +21,68 @@ def validate_ip_address(address):
     # print("IP address {} is valid".format(address))
     return True
 
-    
-## A function to validate the scope from the given textfile 
-def validateScopeAddresses(tool, input_file, modified_scope):
-    ## check if scope matches one of these to filter out IP addresses
+#TODO add nmap_uri to hostname because it can scan too but is not allowed
+def validateScopeObjects(list_of_objects):
+    # Check if the scope matches one of these to filter out IP addresses.
     ipAddressFilter = '0', '1', '2', '3', '4', '5', '6', '7', '8','9'
-    
-    if tool == "host":
-        ## remove the https://www from the input_file if found
-        if input_file.startswith("https://www"):
-            modified_scope.append(input_file[12:])
-        ## remove the https:// from the input_file if found        
-        elif input_file.startswith("https://"):
-            modified_scope.append(input_file[8:])
+    for object in list_of_objects:
+        # remove the https://www from the input_file if found
+        if object.main_asset.startswith("https://www"):
+            modified_asset = object.main_asset[12:].strip("\n")
+            object.used_tool("host")
+            object.has_hostname(modified_asset)
+            object.has_host_uri(modified_asset)
+        # remove the https:// from the input_file if found        
+        elif object.main_asset.startswith("https://"):
+            modified_asset = object.main_asset[8:].strip("\n")
+            object.used_tool("host")
+            object.has_hostname(modified_asset)
+            object.has_host_uri(modified_asset)
         ## remove the http://www from the input_file if found
-        elif input_file.startswith("http://www"):
-            modified_scope.append(input_file[11:])
+        elif object.main_asset.startswith("http://www"):
+            modified_asset = object.main_asset[11:].strip("\n")
+            object.used_tool("host")
+            object.has_hostname(modified_asset)
+            object.has_host_uri(modified_asset)
         ## remove the http:// from the input_file if found
-        elif input_file.startswith("http://"):
-            modified_scope.append(input_file[7:])
+        elif object.main_asset.startswith("http://"):
+            modified_asset = object.main_asset[7:].strip("\n")
+            object.used_tool("host")
+            object.has_hostname(modified_asset)
+            object.has_host_uri(modified_asset)
         ## remove the www from the input_file if found
-        elif input_file.startswith("www"):
-            modified_scope.append(input_file[4:])
+        elif object.main_asset.startswith("www"):
+            modified_asset = object.main_asset[4:].strip("\n")
+            object.used_tool("host")
+            object.has_hostname(modified_asset)
+            object.has_host_uri(modified_asset)
         ## make sure IP addresses won't be added to modified_scope
-        elif input_file.startswith(ipAddressFilter):
+        elif object.main_asset.startswith(ipAddressFilter):
             pass
         ## if none of the above is found, write input_file to modified_scope
-        elif len(input_file) > 1:
-            if "." in input_file:
-                modified_scope.append(input_file)
-        return modified_scope
+        elif len(object.main_asset) > 1:
+            if "." in object.main_asset:
+                modified_asset = object.main_asset.strip("\n")
+                object.used_tool("host")
+                object.has_hostname(modified_asset)
+                object.has_host_uri(modified_asset)
 
-    elif tool == "curl":
-        ## check if input_file starts with https://
-        if input_file.startswith("https://"):
-            modified_scope.append(input_file)
+        if object.main_asset.startswith("https://"):
+            modified_asset = object.main_asset.strip("\n")
+            object.used_tool("curl")
+            object.has_hostname(modified_asset)
+            object.has_curl_uri(modified_asset)
         ## check if input_file starts with http://
-        elif input_file.startswith("http://"):
-            modified_scope.append(input_file)
-        return modified_scope
+        elif object.main_asset.startswith("http://"):
+            modified_asset = object.main_asset.strip("\n")
+            object.used_tool("curl")
+            object.has_hostname(modified_asset)
+            object.has_curl_uri(modified_asset)
+        
+        if validate_ip_address(object.main_asset):
+            modified_asset = object.main_asset.strip("\n")
+            object.used_tool("nmap")
+            object.has_IP(modified_asset)
+            object.has_nmap_uri(modified_asset)
 
-    elif tool == "nmap":
-        ## validate the input_file to see if it is a valid IP
-        if validate_ip_address(input_file):
-            modified_scope.append(input_file)
-        return modified_scope
+    return list_of_objects
