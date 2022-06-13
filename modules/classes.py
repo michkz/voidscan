@@ -1,58 +1,84 @@
+from unicodedata import name
+from jinja2 import FileSystemLoader
+from jinja2 import Environment
+
+
 class Asset():
-    def __init__(self, uri):
-        self.uri = uri
+    def __init__(self, main_asset):
+        self.main_asset = main_asset                  # To be set as collective
+        self.host_uri = ''
+        self.curl_uri = ''
+        self.nmap_uri = ''
         self.ip = None
         self.hostname = None
-        self.results = []
-        self.vulnerabilities = []
+        self.tool = None
+        self.customer_name = ''
+        self.customer_phone = ''
+        self.host_results = []
+        self.host_zonetransfer_results = []
+        self.curl_results = []
+        self.nmap_results = []
 
     def has_IP(self, ip):
         self.ip = ip
     
     def has_hostname(self, hostname):
         self.hostname = hostname
+    
+    def used_tool(self, tool):
+        self.tool = tool
 
-    ## Must be a dictionary
-    def add_findings(self, finding):
-        self.results.append(finding)
+    def add_customer_contact(self, name, phone):
+        self.customer_name = name
+        self.customer_phone = phone
 
-    def get_results(self):
-        return self.results
+    def has_host_uri(self, uri):
+        self.host_uri = uri
+    
+    def has_curl_uri(self, uri):
+        self.curl_uri = uri
+    
+    def has_nmap_uri(self, uri):
+        self.nmap_uri = uri
+        
+    # Must be a dictionary
+    def add_host_findings(self, findings):
+        self.host_results.append(findings)
+    
+    def add_host_zonetransfer_results(self, findings):
+        self.host_zonetransfer_results.append(findings)
+
+    def add_curl_findings(self, findings):
+        self.curl_results.append(findings)
+    
+    def add_nmap_findings(self, findings):
+        self.nmap_results.append(findings)
+    
+
     
     def __str__(self):
-        return "Uri: {}\nIP: {}\nHostname: {}\nResults: {}".format(self.uri,self.ip, self.hostname, self.results)
+        return "customer name: {}\ncustomer phone: {}\nmain asset: {}\n".format(self.customer_name, self.customer_phone, self.main_asset)
 
+#TODO - Create customer information class
 class Customer():
     def __init__(self, name):
         self.name = name
         self.address = ''
         self.phonenumber = ''
-
-#TODO - Create the scanner class to start scans from
-class Scanner():
-    def __init__(self, uri):
-        self.uri = uri
-        self.type = ''
-        self.host = None                #TODO - start host from scanner class
-        self.curl = None                #TODO - start curl from scanner class
-        self.nmap = None                #TODO - start nmap from scanner class
     
-# data = {}
-# data['Customer'] = 'Customer One'
-# data['Assets'] = []
+    def add_customer_contact(self, address, phone):
+        self.address = address
+        self.phonenumber = phone
 
-# input_text = ['192.168.1.109', 'localhost']
-# asset_list = []
+class Template:
+    def __init__(self, filename):
+        # templates will be loaded from templates directory
+        self.file_loader = FileSystemLoader('./templates')
+        self.env = Environment(loader=self.file_loader)
+        self.filename = filename
 
-# for line in input_text:
-#     asset = Asset(line)
-#     asset.has_IP(line)
-#     asset_list.append(asset)
+    def render(self, data):
+        return self.env.get_template(self.filename).render(data=data)
 
-# for asset in asset_list:
-#     data['Assets'].append(asset)
-
-# for entry in data['Assets']:
-#     print(entry.uri, entry.results)
-
-
+    def show_output(self, data):
+        print(self.render(data))
