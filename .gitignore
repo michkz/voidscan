@@ -5,3 +5,7 @@ normal.txt
 drafts.py
 inputfile.py
 exampleForScopeLoop.py
+PentestReport.md
+images/wes.png
+templates/HelloWorld.jinja2
+templates/PentestReport.jinja
