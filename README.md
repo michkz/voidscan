@@ -47,12 +47,12 @@ THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND. YOU MAY USE THIS
 <!-- TABLE OF CONTENTS -->
 ### Table of contents
 
- - [About the Project] (#about)
- - [Getting Started] (#gettingstarted)
- - [Usage] (#usage)
- - [Features] (#features)
- - [Roadmap] (#roadmap)
- - [License] (#license)
+ - [About the Project](#about-the-project)
+ - [Getting Started](#getting-started)
+ - [Usage](#usage)
+ - [Features](#features)
+ - [License](#license)
+ - [Contact](#contact) 
  
 
 
