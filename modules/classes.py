@@ -5,7 +5,7 @@ from jinja2 import Environment
 
 class Asset():
     def __init__(self, main_asset):
-        self.main_asset = main_asset                  # To be set as collective
+        self.main_asset = main_asset
         self.host_uri = ''
         self.curl_uri = ''
         self.nmap_uri = ''
