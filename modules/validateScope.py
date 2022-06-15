@@ -1,8 +1,7 @@
 import re                                        ## Regex library
-from modules import validateIPAddress            ## Custom module to validate IP
 from modules.classes import Asset                ## Import Asset class
 
-def validate_ip_address(address):
+def validateIPAddress(address):
     ## define what a valid IP should match to
     match = re.match(r"^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$", address)
 
@@ -25,6 +24,7 @@ def validate_ip_address(address):
 def validateScopeObjects(list_of_objects):
     # Check if the scope matches one of these to filter out IP addresses.
     ipAddressFilter = '0', '1', '2', '3', '4', '5', '6', '7', '8','9'
+    uriStartFilter = 'http', 'https', '//'
     for object in list_of_objects:
         # remove the https://www from the input_file if found
         if object.main_asset.startswith("https://www"):
@@ -61,11 +61,14 @@ def validateScopeObjects(list_of_objects):
             pass
         ## if none of the above is found, write input_file to modified_scope
         elif len(object.main_asset) > 1:
-            if "." in object.main_asset:
-                modified_asset = object.main_asset.strip("\n")
-                object.used_tool("host")
-                object.has_hostname(modified_asset)
-                object.has_host_uri(modified_asset)
+            if not object.main_asset.startswith(uriStartFilter):
+                if "." in object.main_asset:
+                    modified_asset = object.main_asset.strip("\n")
+                    object.used_tool("host")
+                    object.has_hostname(modified_asset)
+                    object.has_host_uri(modified_asset)
+        else:
+            print("{} is invalid".format(object.main_asset))
 
         if object.main_asset.startswith("https://"):
             modified_asset = object.main_asset.strip("\n")
@@ -79,7 +82,7 @@ def validateScopeObjects(list_of_objects):
             object.has_hostname(modified_asset)
             object.has_curl_uri(modified_asset)
         
-        if validate_ip_address(object.main_asset):
+        if validateIPAddress(object.main_asset):
             modified_asset = object.main_asset.strip("\n")
             object.used_tool("nmap")
             object.has_IP(modified_asset)
