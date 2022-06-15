@@ -12,7 +12,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-![alt text](./images/logo.png "Voidscan Logo")  
+![logo](https://user-images.githubusercontent.com/17614548/173921014-8d5b005b-0266-4484-b426-dc15eb399309.png)
 </p>
 
 <h1 align="center">A Blackbox Reconnaissance Tool</h1>
