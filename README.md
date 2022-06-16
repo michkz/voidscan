@@ -92,24 +92,24 @@ $ sudo apt-get install python3.8
 
 ### Installation
 
-####1. Get the repository
+#### 1. Get the repository
 
 ```bash
 $ git clone https://github.com/michkz/voidscan
 ```
 
-####2. Go into the repository
+#### 2. Go into the repository
 
 ```bash
 $ cd voidscan/
 ```
 
-####3. Install the requirements
+#### 3. Install the requirements
 ```bash
 $ pip install -r requirements.txt
 ```
 
-####4. Run the program
+#### 4. Run the program
 
 ```bash
 $ python3.8 main.py -f [file.txt]
