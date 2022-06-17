@@ -1,7 +1,7 @@
 {% for asset in data %}
-# Resultaten voor: {{asset.main_asset}}
+# Results for: {{asset.main_asset}}
 --
-Deze asset komt in aanmerking voor de volgende tools
+This asset can be used with the following tools
 
 | Host | Curl | Nmap |
 | ---- | ---- | ---- |
@@ -10,11 +10,11 @@ Deze asset komt in aanmerking voor de volgende tools
 
 {% if asset.host_results|length %}
 ## Host
-Resultaten van de host scan met commando `host {{ asset.host_uri }}`
+Results of the host scan with command `host {{ asset.host_uri }}`
 
 {% for key in asset.host_results -%}
 {% if key.IPv4 %}
-| IPv4 adressen |
+| IPv4 addresses |
 | ---- |{% endif %}
 {% for result in key.IPv4 -%}
 |{{ result }}|
@@ -22,7 +22,7 @@ Resultaten van de host scan met commando `host {{ asset.host_uri }}`
 
 {% for key in asset.host_results -%}
 {% if key.IPv6 %}
-| IPv6 adressen |
+| IPv6 addresses|
 | ---- |{% endif %}
 {% for result in key.IPv6 -%}
 |{{ result }}|
@@ -30,7 +30,7 @@ Resultaten van de host scan met commando `host {{ asset.host_uri }}`
 
 {% for key in asset.host_results -%}
 {% if key.Mail %}
-| Mail server adressen |
+| Mail server addresses |
 | ------------ |{% endif %}
 {% for result in key.Mail -%}
 |{{ result }}|
@@ -38,7 +38,7 @@ Resultaten van de host scan met commando `host {{ asset.host_uri }}`
 
 {% for key in asset.host_results -%}
 {% if key.NameServer %}
-| Nameserver adressen |
+| Nameserver addresses |
 | ---- |{% endif %}
 {% for result in key.NameServer -%}
 |{{ result }}|
@@ -47,9 +47,9 @@ Resultaten van de host scan met commando `host {{ asset.host_uri }}`
 {% if asset.host_zonetransfer_results %}
 
 ### Zonetransfer 
-Hier zijn de resultaten te vinden van de DNS Zonetransfer Answer section
+Results of the DNS Zonetransfer Answer section
 
-| URI | TTL | IN | AXFR | Resultaat |
+| URI | TTL | IN | AXFR | Result |
 | ---- | ---- | ---- | --- | --- |
 {% for key in asset.host_zonetransfer_results %}
 {%- for result in key.URI %}{{ result }}{% endfor %} |
@@ -62,7 +62,7 @@ Hier zijn de resultaten te vinden van de DNS Zonetransfer Answer section
 
 {% else %}
 ## Host
-Deze asset komt niet in aanmerking voor een Host scan.
+This asset is not viable to be used for a host scan
 
 {% endif %}
 {% if asset.host_zonetransfer_results|length %}
@@ -70,9 +70,9 @@ Deze asset komt niet in aanmerking voor een Host scan.
 {% endif %}
 {% if asset.curl_results|length %}
 ## Curl
-Resultaten van de curl scan met commando `curl {{ asset.curl_uri }}`
+Results of the curl scan with command `curl {{ asset.curl_uri }}`
 
-| Header | Resultaat |
+| Header | Result |
 | ---- | ------------ | 
 {% for result in asset.curl_results %}|HSTS |{{ result.HSTS }}|
 |Location|{{ result.Location }}|
@@ -82,20 +82,20 @@ Resultaten van de curl scan met commando `curl {{ asset.curl_uri }}`
 
 {% else %}
 ## Curl
-Deze asset komt niet in aanmerking voor een Curl scan.
+This asset is not viable to be used for a curl scan
 
 {% endif %}
 {% if asset.nmap_results|length %}
 ## Nmap
-Resultaten van de nmap scan met commando `nmap {{ asset.nmap_uri }}`
+Results of the nmap scan with command `nmap {{ asset.nmap_uri }}`
 
-| Poort | Service |
-| ----- | ------- |
+| Port | Service |
+| ---- | ------- |
 {% for result in asset.nmap_results %}{{ result.Port }} | {{ result.Service }} |
 {% endfor %}
 {% else %}
 ## Nmap
-Deze asset komt niet in aanmerking voor een Nmap scan.
+This asset is not viable to be used for a nmap scan
 {% endif %}
 -----
 
