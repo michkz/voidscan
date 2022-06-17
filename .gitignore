@@ -1,4 +1,7 @@
 .vscode/launch.json
 scope.txt
-normal.txt
 .DS_Store
+PentestReport.md
+images/wes.png
+templates/PentestReport.jinja
+TODO

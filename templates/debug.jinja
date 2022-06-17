@@ -1,0 +1,102 @@
+{% for asset in data %}
+# Results for: {{asset.main_asset}}
+--
+This asset can be used with the following tools
+
+| Host | Curl | Nmap |
+| ---- | ---- | ---- |
+| {% if asset.host_uri %} ✓ {% else %} ✗ {% endif %} | {% if asset.curl_uri %} ✓ {% else %} ✗ {% endif %} | {% if asset.nmap_uri %} ✓ {% else %} ✗ {% endif %} |
+
+
+{% if asset.host_results|length %}
+## Host
+Results of the host scan with command `host {{ asset.host_uri }}`
+
+{% for key in asset.host_results -%}
+{% if key.IPv4 %}
+| IPv4 addresses |
+| ---- |{% endif %}
+{% for result in key.IPv4 -%}
+|{{ result }}|
+{% endfor %}{% endfor %}
+
+{% for key in asset.host_results -%}
+{% if key.IPv6 %}
+| IPv6 addresses|
+| ---- |{% endif %}
+{% for result in key.IPv6 -%}
+|{{ result }}|
+{% endfor %}{% endfor %}
+
+{% for key in asset.host_results -%}
+{% if key.Mail %}
+| Mail server addresses |
+| ------------ |{% endif %}
+{% for result in key.Mail -%}
+|{{ result }}|
+{% endfor %}{% endfor %}
+
+{% for key in asset.host_results -%}
+{% if key.NameServer %}
+| Nameserver addresses |
+| ---- |{% endif %}
+{% for result in key.NameServer -%}
+|{{ result }}|
+{% endfor %}{% endfor %}
+
+{% if asset.host_zonetransfer_results %}
+
+### Zonetransfer 
+Results of the DNS Zonetransfer Answer section
+
+| URI | TTL | IN | AXFR | Result |
+| ---- | ---- | ---- | --- | --- |
+{% for key in asset.host_zonetransfer_results %}
+{%- for result in key.URI %}{{ result }}{% endfor %} |
+{%- for result in key.TTL %}{{ result }}{% endfor %} |
+{%- for result in key.IN %}{{ result }}{% endfor %} |
+{%- for result in key.AXFR %}{{ result }}{% endfor %} |
+{%- for result in key.Result -%}{{ result }}{% endfor %}
+{% endfor %}
+{% endif %}
+
+{% else %}
+## Host
+This asset is not viable to be used for a host scan
+
+{% endif %}
+{% if asset.host_zonetransfer_results|length %}
+
+{% endif %}
+{% if asset.curl_results|length %}
+## Curl
+Results of the curl scan with command `curl {{ asset.curl_uri }}`
+
+| Header | Result |
+| ---- | ------------ | 
+{% for result in asset.curl_results %}|HSTS |{{ result.HSTS }}|
+|Location|{{ result.Location }}|
+|X-Frame-Options|{{ result.XFrameOptions }}|
+|X-XSS-Protection|{{ result.XSSProtection }}|
+{% endfor %}
+
+{% else %}
+## Curl
+This asset is not viable to be used for a curl scan
+
+{% endif %}
+{% if asset.nmap_results|length %}
+## Nmap
+Results of the nmap scan with command `nmap {{ asset.nmap_uri }}`
+
+| Port | Service |
+| ---- | ------- |
+{% for result in asset.nmap_results %}{{ result.Port }} | {{ result.Service }} |
+{% endfor %}
+{% else %}
+## Nmap
+This asset is not viable to be used for a nmap scan
+{% endif %}
+-----
+
+{% endfor %}
