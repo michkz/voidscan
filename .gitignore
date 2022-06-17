@@ -9,3 +9,5 @@ PentestReport.md
 images/wes.png
 templates/HelloWorld.jinja2
 templates/PentestReport.jinja
+modules/validateScope.py
+TODO
