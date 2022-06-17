@@ -1,14 +1,5 @@
 <div id="top"></div>
 
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -39,24 +30,20 @@
 
 <br />
 
-
 ## Disclaimer
 
 THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND. YOU MAY USE THIS SOFTWARE AT YOUR OWN RISK. THE USE IS COMPLETE RESPONSIBILITY OF THE END-USER. THE DEVELOPERS ASSUME NO LIABILITY AND ARE NOT RESPONSIBLE FOR ANY MISUSE OR DAMAGE CAUSED BY THIS PROGRAM.
 
-
 <!-- TABLE OF CONTENTS -->
+
 ### Table of contents
 
- - [About the Project](#about-the-project)
- - [Getting Started](#getting-started)
- - [Usage](#usage)
- - [Features](#features)
- - [License](#license)
- - [Contact](#contact) 
- 
-
-
+- [About the Project](#about-the-project)
+- [Getting Started](#getting-started)
+- [Usage](#usage)
+- [Features](#features)
+- [License](#license)
+- [Contact](#contact)
 
 <!-- ABOUT THE PROJECT -->
 
@@ -65,7 +52,6 @@ THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND. YOU MAY USE THIS
 The goal of this project is to fully automate the reconnaissance phase when conducting a penetration test. It uses a textfile which contains an asset per line to scan through a number of tools. Once the program is done scanning, the gathered results will be presented in the form of a markdown report.
 
 This started as an internship assignment, but will be updated regulary with new tools and code improvements.
-
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -80,12 +66,17 @@ To get a local copy up and running follow these simple example steps.
 Before you can use this program, make sure you have Python 3.8 or higher installed.
 
 ##### MacOS
+
 ```bash
 $ brew install python@3.8
 ```
+
 ##### Windows
+
 Download the right Python version from the [Official Website](https://www.python.org/downloads/windows/)
-##### Unix/Linux  
+
+##### Unix/Linux
+
 ```bash
 $ sudo apt-get install python3.8
 ```
@@ -105,6 +96,7 @@ $ cd voidscan/
 ```
 
 #### 3. Install the requirements
+
 ```bash
 $ pip install -r requirements.txt
 ```
@@ -126,7 +118,8 @@ To use the program, simply go into the project's folder and use the following co
 ```bash
 $ python3.8 main.py -f [file.txt]
 ```
-Where ``` [file.txt]``` has an asset per line, like in the example below
+
+Where ` [file.txt]` has an asset per line, like in the example below
 
 ```bash
 # Example of the file.txt contents
@@ -134,38 +127,40 @@ Where ``` [file.txt]``` has an asset per line, like in the example below
 http://zonetransfer.me/
 ```
 
-
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Features
 
-At the moment the current version consists of the following tools that have a checkmark in the table below. The planned tools are marked with a date or are still TBD 
+At the moment the current version consists of the following tools that have a checkmark in the table below. The planned tools are marked with a date or are still TBD
 
-
-| Tool            |  Status |
-|:----------------|:-------:|
-| `Host` 			 |    ✔    |
-| `Curl` 			 |    ✔    |
-| `Nmap`   		 |    ✔    |
-| `Dirbuster`   	 |   TBD   |
+| Tool        | Status |
+| :---------- | :----: |
+| `Host`      |   ✔    |
+| `Curl`      |   ✔    |
+| `Nmap`      |   ✔    |
+| `Dirbuster` |  TBD   |
 
 #### Host
+
 The host tool allows to collect IPv4, IPv6 and mail server addresses, as well as DNS zonetransfer information if possible. It will use the following commands within this program
 
 ```
 # Where asset will be retrieved from the scope.
 host [asset]
 ```
+
 ```
 # Where asset will be retrieved from the scope.
 host -t ns [asset]
 ```
+
 ```
 # Where asset will be retrieved from the scope and the nameserver from the previous command.
 host -t axfr [asset] [nameserver]
 ```
 
 #### Curl
+
 The curl tool allows to collect useful header information and will use the following commands within this program
 
 ```
@@ -174,6 +169,7 @@ curl -I [asset]
 ```
 
 #### Nmap
+
 The nmap tool will collect the open ports and services. It will use the following commands within this program
 
 ```
@@ -200,4 +196,3 @@ Michkz - michkz@protonmail.com
 Project Link: [https://github.com/michkz/voidscan](https://github.com/michkz/voidscan)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
