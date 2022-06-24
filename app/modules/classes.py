@@ -19,14 +19,17 @@ class Asset():
         self.curl_results = []
         self.nmap_results = []
 
-    def has_IP(self, ip):
+    def set_ip(self, ip):
         self.ip = ip
+    
+    def get_ip(self):
+        return self.ip
 
-    def has_hostname(self, hostname):
+    def set_hostname(self, hostname):
         self.hostname = hostname
-
-    def used_tool(self, tool):
-        self.tool = tool
+    
+    def get_hostname(self):
+        return self.hostname
 
     def add_customer_contact(self, name, phone):
         self.customer_name = name
