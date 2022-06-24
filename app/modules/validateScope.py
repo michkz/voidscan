@@ -23,27 +23,27 @@ def validateScopeObjects(list_of_objects):
         # Remove the https://www from the input_file if found
         if object.main_asset.startswith("https://www"):
             modified_asset = object.main_asset[12:].strip("\n")
-            object.has_hostname(modified_asset)
+            object.set_hostname(modified_asset)
             object.has_host_uri(modified_asset)
         # Remove the https:// from the input_file if found
         elif object.main_asset.startswith("https://"):
             modified_asset = object.main_asset[8:].strip("\n")
-            object.has_hostname(modified_asset)
+            object.set_hostname(modified_asset)
             object.has_host_uri(modified_asset)
         # Remove the http://www from the input_file if found
         elif object.main_asset.startswith("http://www"):
             modified_asset = object.main_asset[11:].strip("\n")
-            object.has_hostname(modified_asset)
+            object.set_hostname(modified_asset)
             object.has_host_uri(modified_asset)
         # Remove the http:// from the input_file if found
         elif object.main_asset.startswith("http://"):
             modified_asset = object.main_asset[7:].strip("\n")
-            object.has_hostname(modified_asset)
+            object.set_hostname(modified_asset)
             object.has_host_uri(modified_asset)
         # Remove the www from the input_file if found
         elif object.main_asset.startswith("www"):
             modified_asset = object.main_asset[4:].strip("\n")
-            object.has_hostname(modified_asset)
+            object.set_hostname(modified_asset)
             object.has_host_uri(modified_asset)
         # Make sure IP addresses won't be added to modified_scope
         elif object.main_asset.startswith(ipAddressFilter):
@@ -53,7 +53,7 @@ def validateScopeObjects(list_of_objects):
             if not object.main_asset.startswith(uriStartFilter):
                 if "." in object.main_asset:
                     modified_asset = object.main_asset.strip("\n")
-                    object.has_hostname(modified_asset)
+                    object.set_hostname(modified_asset)
                     object.has_host_uri(modified_asset)
         else:
             print("[!] {} cannot be used with the current tool set"
@@ -62,16 +62,16 @@ def validateScopeObjects(list_of_objects):
         # Check if input_file starts with https://
         if object.main_asset.startswith("https://"):
             modified_asset = object.main_asset.strip("\n")
-            object.has_hostname(modified_asset)
+            object.set_hostname(modified_asset)
             object.has_curl_uri(modified_asset)
         # Check if input_file starts with http://
         elif object.main_asset.startswith("http://"):
             modified_asset = object.main_asset.strip("\n")
-            object.has_hostname(modified_asset)
+            object.set_hostname(modified_asset)
             object.has_curl_uri(modified_asset)
         # Check if the IP address is valid
         if validateIPAddress(object.main_asset):
             modified_asset = object.main_asset.strip("\n")
-            object.has_IP(modified_asset)
+            object.set_ip(modified_asset)
             object.has_nmap_uri(modified_asset)
     return list_of_objects
