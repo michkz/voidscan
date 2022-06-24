@@ -1,9 +1,10 @@
-from commands.host import hostTool                        # Command to run host
-from commands.curl import curlTool                        # Command to run curl
-from commands.nmap import nmapTool                        # Command to run nmap
-from modules.classes import Template
-from modules.prepareScope import create_original_asset_list
-from modules.validateScope import validateScopeObjects
+from app.commands.host import hostTool                        # Command to run host
+from app.commands.curl import curlTool                        # Command to run curl
+from app.commands.nmap import nmapTool                        # Command to run nmap
+from app.modules.classes import Template
+from app.modules.prepareScope import create_original_asset_list
+from app.modules.validateScope import validateScopeObjects
+
 import argparse
 
 

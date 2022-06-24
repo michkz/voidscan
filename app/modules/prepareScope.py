@@ -1,4 +1,4 @@
-from modules.classes import Asset
+from app.modules.classes import Asset
 
 
 def create_original_asset_list(original_scope):

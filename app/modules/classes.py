@@ -70,7 +70,7 @@ class Template:
 
     def __init__(self, filename):
         # templates will be loaded from templates directory
-        self.file_loader = FileSystemLoader('./templates')
+        self.file_loader = FileSystemLoader('./app/templates')
         self.env = Environment(loader=self.file_loader)
         self.filename = filename
 
