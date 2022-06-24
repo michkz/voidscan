@@ -1,13 +1,15 @@
 import subprocess            # subprocess library
 
 
-def curlTool(asset):
+def curlCommand(asset):
     # Function to eliminate duplicate code and fire off the curl command.
-    def curlCommand(asset):
-        curl_cmd = subprocess.Popen("curl -I {}".format(asset),
-                                    shell=True, stdout=subprocess.PIPE,
-                                    stderr=subprocess.PIPE)
-        return curl_cmd.stdout
+    curl_cmd = subprocess.Popen("curl -I {}".format(asset),
+                                shell=True, stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE)
+    return curl_cmd.stdout
+
+
+def curlTool(asset):
 
     # Creating the result dictionary with the fields needed for the report.
     curl_result = {}
@@ -18,7 +20,6 @@ def curlTool(asset):
     moved_host = ""								# Variable for current uri
 
     try:
-
         for line in curlCommand(asset.curl_uri):
             line = line.decode('utf-8').strip("\n\r")
             # Save new location to var if found
